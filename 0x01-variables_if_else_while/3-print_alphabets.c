@@ -9,12 +9,22 @@
 int main(void)
 {
 	char low;
+	
+	char upr;
 
-	for (low = 'a'; low <= 'z'; low++)
-		putchar(low);
-	for (low = 'A'; low <= 'Z'; low++)
-		putchar(low);
-		putchar('\n');
+	low = 'a';
+	upr = 'A';
 
+	while 
+		(low <= 'z') {
+			putchar(low);
+			low++;
+		}
+	while 
+		(upr <+ 'Z') {
+			putchar(upr);
+			upr++;
+		}
+	putchar('\n);
 	return (0);
 }
