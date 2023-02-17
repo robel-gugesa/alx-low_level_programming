@@ -21,7 +21,7 @@ int main(void)
 			low++;
 		}
 	while 
-		(upr <+ 'Z') {
+		(upr <= 'Z') {
 			putchar(upr);
 			upr++;
 		}
