@@ -1,83 +1,28 @@
-## [C - File I/O](0x15-file_io) :file_folder:
+0x15. C - File I/O
+1. Write a function that reads a text file and prints it to the POSIX standard output.
+Prototype: ssize_t read_textfile(const char *filename, size_t letters);
+	where letters is the number of letters it should read and print
+	returns the actual number of letters it could read and print
+	if the file can not be opened or read, return 0
+	if filename is NULL return 0
+	if write fails or does not write the expected amount of bytes, return 0
+2. Create a function that creates a file.
+Prototype: int create_file(const char *filename, char *text_content);
+	where filename is the name of the file to create and text_content is a NULL terminated string to write to the file
+	Returns: 1 on success, -1 on failure (file can not be created, file can not be written, write “fails”, etc…)
+	The created file must have those permissions: rw-------. If the file already exists, do not change the permissions.
+	if the file already exists, truncate it
+	if filename is NULL return -1
+	if text_content is NULL create an empty file
+3. Write a function that appends text at the end of a file.
+Prototype: int append_text_to_file(const char *filename, char *text_content);
+	where filename is the name of the file and text_content is the NULL terminated string to add at the end of the file
+	Return: 1 on success and -1 on failure
+	Do not create the file if it does not exist
+	If filename is NULL return -1
+	If text_content is NULL, do not add anything to the file. Return 1 if the file exists and -1 if the file does not exist or if you do not have the required permissions to write the file
+4. Write a program that copies the content of a file to another file.
 
-## [Tests](./tests) Tests Folder
-
-
-
-## [Main.h](./main.h) This Directory contains all the prototypes. 
-
-| File                      | Prototype                                                            |
-| ------------------------- | -------------------------------------------------------------------- |
-| `0-read_textfile.c`       | `ssize_t read_textfile(const char *filename, size_t letters);`       |
-| `1-create_file.c`         | `int create_file(const char *filename, char *text_content);`         |
-| `2-append_text_to_file.c` | `int append_text_to_file(const char *filename, char *text_content);` |
-
-## Tasks :page_with_curl:
-
-* `0. Tread lightly, she is near`
-  * [0-read_textfile.c](./0-read_textfile.c): C function that reads a text file and
-  prints it to the `POSIX` standard output.
-  * The parameter `letters` is the number of letters the function should read and print.
-  * If the file is `NULL` or cannot be opened or read - returns `0`.
-  * If the `write` call fails or does not write the expected number of bytes - returns `0`.
-  * Otherwise - returns the actual number of bytes the function can read and print.
-
-* `1. Under the snow`
-  * [1-create_file.c](./1-create_file.c): C function that creates a file.
-  * The paramter `filename` is the name of the file to create.
-  * The parameter `text_content` is a null-terminated string to write to the file.
-  * If `text_content` is `NULL`, the function creates an empty file.
-  * The created file has the permissions `rw-------`.
-  * If the file already exists, the existing permissions are not changed.
-  * Existing files are truncated.
-  * If `filename` is `NULL` or the funciton fails - returns `-1`.
-  * Otherwise - returns `1` on success.
-
-* `2. Speak gently, she can hear`
-  * [2-append_text_to_file.c](./2-append_text_to_file.c): C function that appends text at
-  the end of a file.
-  * The parameter `filename` is the name of the file.
-  * The parameter `text_content` is a null-terminated string to append to the file.
-  * The function does not create the file if it does not exist.
-  * If `text_content` is `NULL`, nothing is added to the file.
-  * If the function fails or `filename` is `NULL` - returns `-1`.
-  * If the file does not exist or the user lacks write permissions on the file - returns `-1`.
-  * Otherwise - returns `1`.
-
-* `3. cp`
-  * [3-cp.c](./3-cp.c): C program that copies the contents of a file to another file.
-  * Usage: `cp file_from file_to`
-  * If `file_to` already exists, it is truncated.
-  * The created file has the permissions `rw-rw-r--`.
-  * If the file already exists, the existing permissions are not changed.
-  * If the number of arguments is incorrect, the function prints `Usage: cp file_from
-  file_to`, followed by a new line on the `POSIX` standard error and exits with code `97`.
-  * If `file_from` does not exist or the user lacks read permissions on it,
-  the function prints `Error: Can't read from file NAME_OF_THE_FILE`, followed by a new
-  line and exits with code `98`.
-    * Where `NAME_OF_THE_FILE` is the first argument passed to the program.
-  * If files cannot be created or if `write` to `file_to` fails, the function prints
-  `Error: Can't write to NAME_OF_THE_FILE`, followed by a new line and exits with code `99`.
-    * Where `NAME_OF_THE_FILE` is the second argument passed to the program.
-  * If the user cannot close a file descriptor, the function prints `Error:
-  Can't close fd FD_VALUE`, followed by a new line on the `POSIX` standard
-  error and exits with code `100`.
-    * Where `FD_VALUE` is the value of the file descriptor.
-
-* `4. elf`
-  * [100-elf_header.c](./100-elf_header.c): C program that displays the information contained
-  in the `ELF` header at the start of an `ELF` file.
-  * Usage `elf_header elf_filename`
-  * Displayed information:
-    * Magic
-    * Class
-    * Data
-    * Version
-    * OS/ABI
-    * ABI Version
-    * Type
-    * Entry point address
-  * Format is identical to `readelf -h` (version `2.26.1`).
-  * If an error occurs or the file is not an `ELF` file, the function displays a
-  corresponding error message to `stderr` and exits with a status value of `98`.
+	Usage: cp file_from file_to
+	if the number of argument is not the correct one, exit with code 97 and print Usage: cp file_from file_to, followed by a new line, on the POSIX standard error
 
